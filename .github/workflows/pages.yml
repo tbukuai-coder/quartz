@@ -41,14 +41,7 @@ jobs:
       - name: Pull wiki content
         run: |
           rm -rf content
-          # Retry up to 3 times on rate limit
-          for i in 1 2 3; do
-            if git clone --depth 1 https://huggingface.co/datasets/tbukuai/hf-papers-wiki content 2>/dev/null; then
-              break
-            fi
-            echo "Attempt $i failed, retrying in $((i * 10))s..."
-            sleep $((i * 10))
-          done
+          git clone --depth 1 https://huggingface.co/datasets/tbukuai/hf-papers-wiki content
           rm -f content/README.md
 
       - name: Build Quartz
