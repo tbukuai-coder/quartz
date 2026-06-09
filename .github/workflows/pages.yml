@@ -38,6 +38,13 @@ jobs:
       - name: Install Quartz plugins
         run: npx quartz plugin install --from-config
 
+      - name: Pull wiki content
+        run: |
+          git clone --depth 1 https://huggingface.co/datasets/tbukuai/hf-papers-wiki /tmp/hf-papers-wiki
+          rm -rf content
+          mv /tmp/hf-papers-wiki content
+          rm content/README.md
+
       - name: Build Quartz
         run: npx quartz build
 
